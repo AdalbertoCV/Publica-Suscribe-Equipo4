@@ -12,10 +12,11 @@
 #-------------------------------------------------------------------------
 import random
 from src.patient import Patient
-from src.helpers.publicador import publish
+from src.helpers.publicador import Publisher
 import time
 
 if __name__ == '__main__':
+    publisher = Publisher()
     print("Iniciando simulación del sistema SMAM...")
     older_patients = []
     total_patients = random.randint(1, 5)
@@ -32,9 +33,9 @@ if __name__ == '__main__':
             print("analizando signos vitales...")
             if patient.wearable.blood_pressure > 110 or patient.wearable.temperature > 37.5 or patient.wearable.heart_rate > 110:
                 print("anomalía detectada, notificando signos vitales...")
-                publish('notifier', patient.to_json())
+                publisher.publish('notifier', patient.to_json())
             print()
             print("actualizando expediente...")
-            publish('record', patient.to_json())
-            publish('monitor', patient.to_json())
+            publisher.publish('record', patient.to_json())
+            publisher.publish('monitor', patient.to_json())
             time.sleep(1)

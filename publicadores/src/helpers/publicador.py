@@ -4,7 +4,6 @@ class Publisher:
     
     def __init__(self): # Inicializamos la instancia y abrimos la conexion
         self.conn = stomp.Connection()
-        self.conn.start()
         self.conn.connect('admin', 'admin', wait=True)
     
     # Envia los datos a la cola
