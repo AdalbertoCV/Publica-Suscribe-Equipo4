@@ -1,7 +1,6 @@
 import json
 import time
 import sys
-import telepot
 import stomp
 
 class Monitor(stomp.ConnectionListener):
@@ -22,8 +21,8 @@ class Monitor(stomp.ConnectionListener):
             conn.disconnect()
             sys.exit("Conexión finalizada...")
 
-    def on_message(self, headers, message):
-        data = json.loads(message)
+    def on_message(self, message ):
+        data = json.loads(message.body)
         print("ADVERTENCIA!!!")
         print(
             f"[{data['wearable']['date']}]: asistir al paciente {data['name']} {data['last_name']}... con wearable {data['wearable']['id']}")

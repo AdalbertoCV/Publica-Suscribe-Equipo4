@@ -1,15 +1,3 @@
-##!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#-------------------------------------------------------------------------
-# Archivo: main.py
-# Capitulo: Estilo Publica-Suscribe
-# Autor(es): Perla Velasco & Yonathan Mtz. & Jorge Solís
-# Version: 3.0.0 Marzo 2022
-# Descripción:
-#
-#   Este archivo define el punto de ejecución del Publicador
-#
-#-------------------------------------------------------------------------
 import random
 from src.patient import Patient
 from src.helpers.publicador import Publisher
