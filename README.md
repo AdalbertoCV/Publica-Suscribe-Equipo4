@@ -1,4 +1,4 @@
-# Arquitectura Publica-Suscribe
+# Arquitectura Publica-Suscribe Equipo 4 
 
 ## Sistema de Monitoreo de Adultos Mayores (SMAM)
 
@@ -8,7 +8,11 @@ La comunidad llamada Girls that Code in Python, que es una comunidad altruista e
 
 En la siguiente figura se muestra el diseño de la propuesta de solución del departamento de desarrollo para el SMAM.
 
-![Vista de contenedores del SMAM](docs/context-view.png)
+![Vista de contenedores del SMAM](docs/Publica-Suscribe.jpg)
+
+En la siguiente figura se aprecia el comportamiento esperado basado en la imagen anterior:
+
+![Diagrama de secuencias del SMAM](docs/DinamicaPUBSUB.png)
 
 ## Estructura del proyecto
 
@@ -16,8 +20,8 @@ Este repositorio contiene los siguientes directorios y archivos:
 
 ```bash
     ├── docs                                # carpeta de documentación
-    │  ├── context-view.png                 # vista del contexto del sistema
-    │  ├── smam.drawio                      # archivo editable de daiagramas del sistema 
+    │  ├── Publica-Suscribe.jpg             # vista del contexto del sistema
+    │  ├── DinamicaPUBSUB.png               # archivo editable de daiagramas del sistema 
     ├── publicadores                        # publicadores del sistema
     |  ├── src                              # código fuente de los publicadores
     │     ├── devices                       # archivos de definición de dispositivos
@@ -43,131 +47,85 @@ Este repositorio contiene los siguientes directorios y archivos:
 ## Prerrequisitos
 - Clonar el repositorio:
    ```shell
-   $ git clone https://gitlab.com/tareas-arquitectura-de-software-curso/publica-suscribe
-   $ cd publica-subscribe
-   ```
-- Contar con python 3.8 o superior y pip3 (las pruebas fueron realizadas con la versión 3.8). Se recomienda utilizar [pyenv](https://github.com/pyenv/pyenv) como manejador de versiones de python; una vez instalado se pueden seguir los siguientes comandos para instalar la versión deseada de python, esto hay que realizarlo en la raíz del repositorio:
-   ```shell
-   $ pyenv install 3.8
-   $ pyenv local 3.8
+   $ git clone https://github.com/AdalbertoCV/Publica-Suscribe-Equipo4.git
+   $ cd Publica-Suscribe-Equipo4
    ```
 
-- Crear un ambiente virtual para manejar las dependencias ejecutando:
-   ```shell
-   $ python3 -m venv venv
-   ```
+- Contar con pip y python 3.8 o superior, Ademas de contar con Anaconda para la creación de un entorno Virtual
 
-   en Windows:
-   ```shell
-   $ python3 -m venv venv
-   ```
 
-   si no funciona el comando anterior, ejecutar el siguiente:
-   ```shell
-   $ py -3 -m venv venv
-   ```
+- Se crea un entorno virtual con el siguiente comando
 
-   Esto creará una carpeta llamada "venv" que representa nuestro ambiente virtual y donde instalaremos todas las dependencias.
+```
+conda create --name pubsub python=3.8 -y
+```
 
-- Activamos el ambiente virtual:
-   ```shell
-   $ source venv/bin/activate
-   ```
 
-   o en Windows:
-   ```shell
-   $ venv\Scripts\activate
-   ```
+- Para activar el entorno:
 
-- Instalamos las dependencias del sistema ejecutando:
-   ```shell
-   (venv)$ pip3 install -r requirements.txt 
-   ```
+```
+source activate pubsub
+```
 
-   Los paquetes que se instalarán son los siguientes:
 
-   Paquete | Versión | Descripción
-   --------|---------|------------
-   pika   | 1.1.0   | Implementación del protocolo AMQP 0-9-1 y que incuye la extensión de RabbitMQ
-   Faker  | 13.3.0  | Generador de datos falsos
-   telepot| 12.7    | Api de Telegram
+- Descargar las dependencias correspondientes dentro de el entorno virtual:
 
-   *__Nota__: También puedes instalar estos prerrequisitos manualmente ejecutando los siguientes comandos:*   
-   > pip3 install pika== 1.1.0
-   > pip3 install Faker==13.3.0
-   > pip3 install telepot==12.7
+```
+pip3 install stomp.py
+pip3 install Faker
+pip3 install telepot
+```
 
-- Instalamos RabbitMQ. La manera recomendada para implementar una instancia de RabbitMQ es utilizando [Docker](https://www.docker.com/), para instalarlo puedes seguir las instrucciones para cada sistema operativo haciendo clic [aquí](https://docs.docker.com/install/). Una vez instalado docker podemos ejecutar el siguiente comando:
+## Deploy activeMQ
 
-    ```shell
-    $ docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
-    ```
+```
+docker run -p 8161:8161 -p 61613:61613 rmohr/activemq
+```
 
-    Este comando correrá un contenedor de docker con la imagen de RabbitMQ, el cual seguirá corriendo hasta que sea detenido explícitamente.
 
-## Ejecución
 
-Sigue las siguientes instrucciones para ejecutar los diferentes componentes del sistema.
+# Ejecucion de el publicador de mensajes
 
-> **Nota:** Cada componente debe ser ejecutado en una terminal independiente
+````
 
-### Publicador
+cd publishers
 
-- Entramos a la carpeta `publicadores`:
-   ```shell
-   (venv)$ cd publicadores
-   ```
+python3 main.py
 
-- Ejecutamos el archivo `main.py`:
-   ```shell
-   (venv)$ python main.py
-   ```
+````
 
-### Suscriptores
+# Ejecucion de los suscriptores 
 
-**Notificador de alertas**
+```
+cd suscribers
+```
 
-- Entramos a la carpeta `suscriptores`:
-   ```shell
-   (venv)$ cd suscriptores
-   ```
+- Notificador 
 
-- Ejecutamos el archivo `notifier.py`:
-   ```shell
-   (venv)$ python notifier.py
-   ```
+```
+python3 notifier.py
+```
 
-**Log**
+- Log
 
-- Entramos a la carpeta `suscriptores`:
-   ```shell
-   (venv)$ cd suscriptores
-   ```
+```
+python3 record.py
+```
 
-- Ejecutamos el archivo `record.py`:
-   ```shell
-   (venv)$ python record.py
-   ```
+- Monitor
 
-**Monitor**
-
-- Entramos a la carpeta `suscriptores`:
-   ```shell
-   (venv)$ cd suscriptores
-   ```
-
-- Ejecutamos el archivo `monitor.py`:
-   ```shell
-   (venv)$ python monitor.py
-   ```
+```
+python3 monitor.py
+```
 
 ## Versión
 
-2.2.0 - Marzo 2022
+2.2.1 - Mayo 2023
 
 ## Autores
 
-* **Perla Velasco**
-* **Yonathan Martínez**
-* **Sergio Salazar**
-* **Jorge Solis**
+* **Narda Viktoria Gómez Aguilera**
+* **Brayan Domínguez Saucedo**
+* **Héctor Abraham Gónzalez Durán**
+* **Elliot Axel Noriega**
+* **Adalberto Cerrillo Vázquez**
