@@ -1,3 +1,42 @@
+##!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#-------------------------------------------------------------------------
+# Archivo: monitor.py
+# Capitulo: Estilo Publica-Suscribe
+# Autor(es): Adalberto Cerrillo, Viktoria Gómez, Brayan Domínguez, Hector González, Elliot Noriega
+# Version: Mayo 2023
+# Descripción:
+#
+#   Esta clase define el suscriptor que recibirá mensajes desde el distribuidor de mensajes
+#   y los mostrará al área interesada para su monitoreo continuo
+#
+#   Este archivo también define el punto de ejecución del Suscriptor
+#
+#   A continuación se describen los métodos que se implementaron en esta clase:
+#
+#                                             Métodos:
+#           +------------------------+--------------------------+-----------------------+
+#           |         Nombre         |        Parámetros        |        Función        |
+#           +------------------------+--------------------------+-----------------------+
+#           |       __init__()       |  - self: definición de   |  - constructor de la  |
+#           |                        |    la instancia de la    |    clase              |
+#           |                        |    clase                 |                       |
+#           +------------------------+--------------------------+-----------------------+
+#           |       suscribe()       |  - self: definición de   |  - inicializa el      |
+#           |                        |    la instancia de la    |    proceso de         |
+#           |                        |    clase                 |    monitoreo de       |
+#           |                        |                          |    signos vitales     |
+#           +------------------------+--------------------------+-----------------------+
+#           |     on_message()       |  - self: definición de   |  - muetra en pantalla |
+#           |                        |    la instancia de la    |    los datos del      |
+#           |                        |    clase                 |    adulto mayor       |
+#           |                        |                          |    recibidos desde el |
+#           |                        |                          |    distribuidor de    |
+#           |                        |                          |    mensajes           |
+#           +------------------------+--------------------------+-----------------------+
+#
+#-------------------------------------------------------------------------
+
 import json
 import time
 import sys
