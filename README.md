@@ -82,7 +82,11 @@ pip3 install telepot
 docker run -p 8161:8161 -p 61613:61613 rmohr/activemq
 ```
 
+# Visualizacion desde el administrador
 
+Ingresa mediante cualquier navegador a 'localhost:8161', haz click en la opcion 'Manage ActiveMQ broker', ingresa como usuario y contraseña 'admin'.
+
+En 'Queues' observaras el flujo de mensajes que habra durante la ejecucion.
 
 # Ejecucion de el publicador de mensajes
 
@@ -117,6 +121,9 @@ python3 record.py
 ```
 python3 monitor.py
 ```
+
+
+
 
 ## Versión
 
